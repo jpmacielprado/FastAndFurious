@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>local.jotape</groupId>
-	<artifactId>F-F</artifactId>
+	<artifactId>FastFood</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>F-F</name>
+	<name>FastFood</name>
 	<description>Fast and furious (fast food)</description>
 	<url/>
 	<licenses>
@@ -61,7 +61,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
