@@ -54,7 +54,7 @@ public class ProdutoController {
     public ResponseEntity<Produto> atualizar(@PathVariable Long produtoID,
             @RequestBody Produto produto) {
 
-        //Verifica s eo produto existe 
+        //Verifica se o produto existe 
         if (!produtoRepository.existsById(produtoID)) {
             return ResponseEntity.notFound().build();
         }
