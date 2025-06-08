@@ -14,7 +14,7 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
-    private double preco;
+    private Double preco;
     private String categoria;
 
     
@@ -36,11 +36,11 @@ public class Produto {
         this.id = id;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
