@@ -50,17 +50,26 @@ public class ProdutoController {
         return produtoRepository.save(produto);
     }
 
-    @PutMapping("/produtos/{produtoID}")
-    public ResponseEntity<Produto> atualizar(@PathVariable Long produtoID,
-            @RequestBody Produto produto) {
-
-        //Verifica se o produto existe 
-        if (!produtoRepository.existsById(produtoID)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        produto.setId(produtoID);
-        produto = produtoRepository.save(produto);
-        return ResponseEntity.ok(produto);
+   @PutMapping("/produtos/{id}")
+public ResponseEntity<Produto> atualizarParcialmente(@PathVariable Long id, @RequestBody Produto dados) {
+    Optional<Produto> optionalProduto = produtoRepository.findById(id);
+    if (optionalProduto.isEmpty()) {
+        return ResponseEntity.notFound().build();
     }
+
+    Produto produto = optionalProduto.get();
+
+    if (dados.getNome() != null) {
+        produto.setNome(dados.getNome());
+    }
+    if (dados.getPreco() != null) {
+        produto.setPreco(dados.getPreco());
+    }
+    if (dados.getCategoria() != null) {
+        produto.setCategoria(dados.getCategoria());
+    }
+
+    produtoRepository.save(produto);
+    return ResponseEntity.ok(produto);
+}
 }
