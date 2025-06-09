@@ -29,7 +29,7 @@ public class ProdutoController {
     private ProdutoRepository produtoRepository;
 
     @GetMapping("/produtos")
-    public List<Produto> listas() {
+    public List<Produto> listar() {
         return produtoRepository.findAll();
     }
 

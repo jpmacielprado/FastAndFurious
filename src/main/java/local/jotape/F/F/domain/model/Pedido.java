@@ -6,22 +6,33 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Table(name = "pedidos")
 public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    private Produto produto;
+    @ManyToMany
+    @JoinTable(
+            name = "pedido_produto",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id")
+    )
+    private List<Produto> produtos;  // lista de produtos
 
     private String descricao;
-    private BigDecimal preco;
+
+    private BigDecimal preco; // preço total calculado
 
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
@@ -32,10 +43,9 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Produto produto, String descricao, BigDecimal preco) {
-        this.produto = produto;
+    public Pedido(List<Produto> produtos, String descricao) {
+        this.produtos = produtos;
         this.descricao = descricao;
-        this.preco = preco;
     }
 
     public long getId() {
@@ -46,12 +56,12 @@ public class Pedido {
         this.id = id;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public List<Produto> getProdutos() {
+        return produtos;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     public String getDescricao() {
